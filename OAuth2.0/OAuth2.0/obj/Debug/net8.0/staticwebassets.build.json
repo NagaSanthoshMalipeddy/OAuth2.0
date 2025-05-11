@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "/8n8dcIMTa8JsR7EIHGJRjI5ujzfi1nLk4JG0mCXe/g=",
+  "Source": "OAuth2.0",
+  "BasePath": "_content/OAuth2.0",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

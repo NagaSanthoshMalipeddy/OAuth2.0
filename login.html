@@ -1,0 +1,63 @@
+<html>
+     <head>
+          <script async defer crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"></script>
+     </head>
+     <body>
+          <div id="g_id_onload"
+               data-client_id="62670991758-sce12s3jiqho0j6d2jhel7fuc9fn6thh.apps.googleusercontent.com"
+               data-context="signin"
+               data-ux_mode="popup"
+               data-login_uri="http://localhost:5256/api/LogIn/login"
+               data-auto_prompt="false">
+          </div>
+
+          <div class="g_id_signin"
+               data-type="standard"
+               data-shape="rectangular"
+               data-theme="filled_blue"
+               data-text="signin_with"
+               data-size="large"
+               data-locale="en-US"
+               data-logo_alignment="left">
+          </div>
+     
+     <fb:login-button 
+      scope="public_profile,email"
+      onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '1736712173892626', // Replace with your Facebook App ID
+          cookie: true,
+          xfbml: true,
+          version: 'v18.0'
+        });
+      };
+
+      function checkLoginState() {
+        FB.getLoginStatus(function (response) {
+          if (response.status === 'connected') {
+            FB.api('/me', { fields: 'name,email' }, function (userData) {
+              console.log('FB User:', userData);
+
+              // Optionally send token to your backend
+              fetch("http://localhost:5256/api/LogIn/loginWithFacebook", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ accessToken: response.authResponse.accessToken })
+              });
+            });
+          } else {
+            console.warn("Facebook login failed or cancelled");
+          }
+        });
+      }
+    </script>
+     </body>
+     <script src="https://accounts.google.com/gsi/client" async></script>
+</html>
